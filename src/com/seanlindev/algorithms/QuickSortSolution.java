@@ -1,4 +1,4 @@
-package com.seanlindev;
+package com.seanlindev.algorithms;
 
 import java.util.Arrays;
 

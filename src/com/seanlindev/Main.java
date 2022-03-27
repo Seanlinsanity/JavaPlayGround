@@ -1,5 +1,7 @@
 package com.seanlindev;
 
+import com.seanlindev.algorithms.QuickSortSolution;
+
 import java.util.Arrays;
 
 public class Main {

@@ -1,4 +1,4 @@
-package com.seanlindev;
+package com.seanlindev.algorithms;
 
 public class LongestCommonPrefixSolution {
     public String longestCommonPrefix(String[] strs) {
