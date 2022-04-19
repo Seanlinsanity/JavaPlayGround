@@ -16,13 +16,12 @@ public class PickingNumbers {
         }
 
         int result = 0;
-        for (Map.Entry<Integer, Integer> set :
-                numCountMap.entrySet()) {
-            if (numCountMap.get(set.getKey() + 1) != null) {
-                Integer count = numCountMap.get(set.getKey()) + numCountMap.get(set.getKey() + 1);
-                result = Math.max(result, count.intValue());
+        for (Map.Entry<Integer, Integer> set: numCountMap.entrySet()) {
+            Integer key = set.getKey();
+            if (numCountMap.get(key + 1) != null) {
+                result = Math.max(numCountMap.get(key + 1).intValue() + set.getValue().intValue(), result);
             } else {
-                result = Math.max(result, numCountMap.get(set.getKey()).intValue());
+                result = Math.max(set.getValue().intValue(), result);
             }
         }
 
