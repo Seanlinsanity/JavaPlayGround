@@ -96,5 +96,46 @@ public class ImplementTrie {
 
             return true;
         }
+        
+        public void delete(String word) {
+            deleteHelper(root, word, 0);
+        }
+
+        private boolean deleteHelper(TrieNode currentNode, String word, int index) {
+            if (index == word.length()) {
+                if (!currentNode.isEndOfWord) {
+                    return false; // Word doesn't exist in the trie
+                }
+                currentNode.isEndOfWord = false;
+                // Check if the current node has no other children
+                return isNodeEmpty(currentNode);
+            }
+
+            char ch = word.charAt(index);
+            int chIndex = ch - 'a';
+            TrieNode nextNode = currentNode.children[chIndex];
+            if (nextNode == null) {
+                return false; // Word doesn't exist in the trie
+            }
+
+            boolean shouldDeleteCurrentNode = deleteHelper(nextNode, word, index + 1);
+
+            if (shouldDeleteCurrentNode) {
+                currentNode.children[chIndex] = null;
+                // Check if the current node has no other children
+                return isNodeEmpty(currentNode);
+            }
+
+            return false;
+        }
+
+        private boolean isNodeEmpty(TrieNode node) {
+            for (int i = 0; i < node.children.length; i++) {
+                if (node.children[i] != null) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
