@@ -2,8 +2,8 @@ package com.seanlindev.algorithms;
 
 import com.seanlindev.utils.TreeNode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /*
 Given the root of a binary tree, return its maximum depth.
@@ -37,23 +37,21 @@ public class MaximumDepthOfBinaryTree {
     //[3,9,20,null,null,15,7]
      public int maxDepth2(TreeNode root) {
          if (root == null) { return 0; }
-         List<TreeNode> nodes = new ArrayList<>();
-         nodes.add(root);
+         Queue<TreeNode> queue = new LinkedList<>();
+         queue.add(root);
          int depth = 0;
-         int currentIndex = 0;
-         while (currentIndex < nodes.size()) { //[1]
+         while (queue.size() > 0) { //[1]
              depth += 1; //1
-             int size = nodes.size();
-             for (int i = currentIndex; i < size; i++) {
-                 TreeNode currentNode = nodes.get(i);
+             int size = queue.size();
+             for (int i = 0; i < size; i++) {
+                 TreeNode currentNode = queue.remove();
                  if (currentNode.left != null) {
-                     nodes.add(currentNode.left);
+                     queue.add(currentNode.left);
                  }
 
                  if (currentNode.right != null) {
-                     nodes.add(currentNode.right);
+                     queue.add(currentNode.right);
                  }
-                 currentIndex += 1;
              }
          }
 
