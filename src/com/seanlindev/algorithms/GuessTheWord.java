@@ -49,6 +49,11 @@ secret exists in words.
 10 <= allowedGuesses <= 30
  */
 public class GuessTheWord {
+    class Master {
+        int guess(String word) {
+            return 0;
+        }
+    }
     public void findSecretWord(String[] wordlist, Master master) {
         Random random = new Random();
         for(int i = 0, matches = 0; i < 10 && matches != 6; i ++){

@@ -1,22 +1,10 @@
 package com.seanlindev.algorithms;
 
+import com.seanlindev.utils.ListNode;
+
 import java.util.Stack;
 
 public class RemoveNodesFromLinkedList {
-    class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-
-        ListNode(int val) {
-            this.val = val;
-            this.next = null;
-        }
-    }
-
     public ListNode removeNodes(ListNode head) {
         Stack<ListNode> stack = new Stack<>();
         ListNode current = head;
