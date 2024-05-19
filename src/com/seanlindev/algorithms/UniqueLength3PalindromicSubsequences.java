@@ -103,7 +103,7 @@ public class UniqueLength3PalindromicSubsequences {
             return;
         }
 
-        if (index == s.length()) { return; }
+        if (index == s.length() || currentStr.length() > 3) { return; }
         String key = String.valueOf(index) + currentStr;
         if (dp.contains(key)) { return; }
         countPalindromeRecursion(index + 1, currentStr + s.charAt(index), s, set, dp);
