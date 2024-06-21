@@ -61,7 +61,7 @@ public class GuessNumberHigherOrLower {
     }
 
     int guess(int num) {
-        int pick = new Random().nextInt();
+        int pick = new Random().nextInt(Integer.MAX_VALUE);
         if (num == pick) {
             return 0;
         } else if (num < pick) {
