@@ -48,4 +48,3 @@ public class MinimumSuffixFlips {
         return count;
     }
 }
-}
