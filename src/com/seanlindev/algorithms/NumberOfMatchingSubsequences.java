@@ -1,5 +1,6 @@
 package com.seanlindev.algorithms;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 /*
@@ -30,24 +31,58 @@ s and words[i] consist of only lowercase English letters.
  */
 
 public class NumberOfMatchingSubsequences {
-    public int numMatchingSubseq(String s, String[] words) {
-        int result = 0;
-        Map<String, Boolean> wordMatchMap = new HashMap<>();
-        for (String word: words) {
-            Boolean cache = wordMatchMap.get(word);
-            if (cache != null) {
-                if (cache) { result += 1; }
-                continue;
-            }
-
-            boolean isMatch = isSubsequence(s, word);
-            if (isMatch) {
-                result += 1;
-            }
-            wordMatchMap.put(word, isMatch);
+    class Node {
+        String word;
+        int index;
+        public Node(String w, int i) {
+            word = w;
+            index = i;
         }
-        return result;
     }
+
+    public int numMatchingSubseq(String s, String[] words) {
+        int ans = 0;
+        ArrayList<Node>[] heads = new ArrayList[26];
+        for (int i = 0; i < 26; ++i)
+            heads[i] = new ArrayList<Node>();
+
+        for (String word: words)
+            heads[word.charAt(0) - 'a'].add(new Node(word, 0));
+
+        for (char c: s.toCharArray()) {
+            ArrayList<Node> old_bucket = heads[c - 'a'];
+            heads[c - 'a'] = new ArrayList<Node>();
+
+            for (Node node: old_bucket) {
+                node.index++;
+                if (node.index == node.word.length()) {
+                    ans++;
+                } else {
+                    heads[node.word.charAt(node.index) - 'a'].add(node);
+                }
+            }
+            old_bucket.clear();
+        }
+        return ans;
+    }
+//    public int numMatchingSubseq(String s, String[] words) {
+//        int result = 0;
+//        Map<String, Boolean> wordMatchMap = new HashMap<>();
+//        for (String word: words) {
+//            Boolean cache = wordMatchMap.get(word);
+//            if (cache != null) {
+//                if (cache) { result += 1; }
+//                continue;
+//            }
+//
+//            boolean isMatch = isSubsequence(s, word);
+//            if (isMatch) {
+//                result += 1;
+//            }
+//            wordMatchMap.put(word, isMatch);
+//        }
+//        return result;
+//    }
 
     boolean isSubsequence(String s, String word) {
         // edge case
